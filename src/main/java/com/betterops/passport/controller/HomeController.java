@@ -1,5 +1,7 @@
 package com.betterops.passport.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @Controller
-public class HomeController{
-	@RequestMapping("/hello")
-	@ResponseBody
-	public String sayHello(HttpServletRequest request) {
-		return "Hello World!";
-	}
+public class HomeController {
+    Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+    @RequestMapping("/hello")
+    @ResponseBody
+    public String sayHello(HttpServletRequest request) {
+        logger.info("test");
+        return "Hello World!";
+    }
 }
