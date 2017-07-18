@@ -1,25 +1,31 @@
 package com.betterops.passport.controller;
 
+import com.betterops.passport.domain.User;
+import com.betterops.passport.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-/**
- * Created by lqs on 2017/6/15.
- */
 
-@Controller
+@RestController
 public class HomeController {
     Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @RequestMapping("/hello")
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(value = "/users")
     @ResponseBody
-    public String sayHello(HttpServletRequest request) {
-        logger.info("test");
-        return "Hello World!";
+    public List<User> sayHello(HttpServletRequest request) {
+        logger.info("get all users");
+        List<User> users = userService.getAllUsers();
+        return users;
     }
 }
