@@ -2,16 +2,15 @@ package com.betterops.passport.controller;
 
 import com.betterops.passport.domain.User;
 import com.betterops.passport.service.UserService;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 
 @RestController
@@ -23,9 +22,8 @@ public class HomeController {
 
     @RequestMapping(value = "/users")
     @ResponseBody
-    public List<User> sayHello(HttpServletRequest request) {
+    public PageInfo<User> sayHello(@RequestParam("page") int page, @RequestParam("size") int size) {
         logger.info("get all users");
-        List<User> users = userService.getAllUsers();
-        return users;
+        return userService.getAllUsers(page, size);
     }
 }

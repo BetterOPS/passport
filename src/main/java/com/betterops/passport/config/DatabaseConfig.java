@@ -1,6 +1,8 @@
 package com.betterops.passport.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Properties;
 
 
 @Configuration
@@ -81,7 +84,25 @@ public class DatabaseConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         sqlSessionFactoryBean.setTypeAliasesPackage("com.betterops.passport.domain");
+        // PageInterceptor
+        Interceptor[] interceptors = new Interceptor[1];
+        interceptors[0] = pageInterceptor();
+        sqlSessionFactoryBean.setPlugins(interceptors);
         return sqlSessionFactoryBean;
     }
 
+    // PageInterceptor
+    private PageInterceptor pageInterceptor() {
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        Properties properties = new Properties();
+        properties.setProperty("helperDialect", "mysql");
+
+        properties.setProperty("pageSizeZero", "false");
+        properties.setProperty("reasonable", "false");
+        properties.setProperty("params", "pageNum,pageSize");
+        properties.setProperty("closeConn", "true");
+
+        pageInterceptor.setProperties(properties);
+        return pageInterceptor;
+    }
 }
