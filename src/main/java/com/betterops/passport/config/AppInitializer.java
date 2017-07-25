@@ -10,13 +10,12 @@ import javax.servlet.ServletException;
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        // 获取应用全局上下文配置类
-        return new Class<?>[] { RootConfig.class, DatabaseConfig.class };
+        return new Class<?>[] { RootConfig.class };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return null;
+        return new Class<?>[] { WebConfig.class };
     }
 
     @Override
