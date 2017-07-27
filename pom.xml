@@ -13,6 +13,7 @@
 
     <properties>
         <spring.version>4.3.9.RELEASE</spring.version>
+        <security.version>4.2.3.RELEASE</security.version>
         <jetty.version>9.4.6.v20170531</jetty.version>
         <javax.verion>3.1.0</javax.verion>
         <logback.version>1.2.3</logback.version>
@@ -55,6 +56,26 @@
             <version>${spring.version}</version>
             <type>jar</type>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- security -->
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${security.version}</version>
         </dependency>
 
         <dependency>
@@ -123,6 +144,13 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.1</version>
+        </dependency>
+
+        <!-- authentication -->
+        <dependency>
+            <groupId>org.springframework.mobile</groupId>
+            <artifactId>spring-mobile-device</artifactId>
+            <version>1.1.5.RELEASE</version>
         </dependency>
 
     </dependencies>
